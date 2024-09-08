@@ -2,18 +2,6 @@ import React, {useEffect, useState} from 'react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
-const staticData = [{
-	"type": "bank-draft", "title": "Bank Draft", "position": 0
-
-}, {"type": "bill-of-lading", "title": "Bill of Lading", "position": 1}, {
-	"type": "invoice", "title":
-		"Invoice", "position": 2
-}, {"type": "bank-draft-2", "title": "Bank Draft 2", "position": 3}, {
-	"type":
-		"bill-of-lading-2", "title":
-		"Bill of Lading 2", "position": 4
-}]
-
 
 // Define a type for the drag-and-drop items
 const ItemType = 'CARD';
@@ -97,14 +85,23 @@ const Modal = ({ isOpen, onClose, content }) => {
 function App() {
   const [loading, setLoading] = useState({});
   const [imageUrls, setImageUrls] = useState([]);
-  const [items, setItems] = useState(staticData); // Initialize with your static data
+  const [items, setItems] = useState([]); // Initialize with your static data
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState(null);
+
+  // Fetch data from the mock API
+  useEffect(() => {
+    (async () => {
+      const response = await fetch('/api/items');
+      const data = await response.json();
+      setItems(data);
+    })()
+  }, []);
 
   // Generate random image URLs once when the component mounts
   useEffect(() => {
     const generateRandomUrls = () => {
-      return staticData.map(() => {
+      return items.map(() => {
         const randomNumber = (min = 1, max = 100) => Math.floor(Math.random() * (max - min) + min);
         return `https://picsum.photos/id/${randomNumber()}/200`;
       });
@@ -112,8 +109,8 @@ function App() {
 
     // Initialize loading state for each image to true
     setImageUrls(generateRandomUrls());
-    setLoading(staticData.reduce((acc, _, index) => ({ ...acc, [index]: true }), {}));
-  }, []);
+    setLoading(items.reduce((acc, _, index) => ({ ...acc, [index]: true }), {}));
+  }, [items]);
 
   const handleImageLoad = (index) => {
     setLoading((prev) => ({ ...prev, [index]: false }));

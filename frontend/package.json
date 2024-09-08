@@ -39,7 +39,13 @@
     ]
   },
   "devDependencies": {
+    "msw": "^2.4.3",
     "prettier": "^3.3.3",
     "tailwindcss": "^3.4.10"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }
