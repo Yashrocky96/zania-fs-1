@@ -1,9 +1,17 @@
+# Simple documentation to run the frontend using docker
+
+
+
 # Development Thought Process
 1. Project configuration and iterative method to work with given requirements
 2. Initially initialised React with Tailwind to quickly setup the required design
 3. First requirement of having images with spinners has been implemented
+4. Using react-dnd drag and drop functionality have been achieved
+5. Using React code Modal have been achieved
+6. Follow the below process to run the server locally (using npm run start)
 
 
+---
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
