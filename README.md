@@ -1,5 +1,5 @@
-# Simple documentation to run the frontend using docker
-
+# Simple documentation
+Vercel Link - https://zania-fs-1.vercel.app/
 
 
 # Development Thought Process
